@@ -13,7 +13,7 @@
                 <div class="mdl-card__title mdl-card--expand">
                     <a href="{{ URL::route('tickets.show', array($ticket->id) )}}"
                        class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Ticket ID: {{ $ticket->id }}
+                        #{{ $ticket->id }} - {{ $ticket->title }}
                     </a>
 
                 </div>
@@ -21,17 +21,13 @@
 
                     <li class="mdl-list__item mdl-list__item--three-line">
                         <span class="mdl-list__item-primary-content">
-                            <span class="mdl-list__item-text-body">
-                                {{ $ticket->title }}
-                            </span>
+                            <span class="mdl-list__item-text-body">Atendente Fulano</span>
+
+                        </span>
+                        <span class="mdl-list__item-secondary-content">
                             <span class="mdl-list__item-text-body">
                               Nome do Cliente
                             </span>
-                        </span>
-
-                        <span class="mdl-list__item-secondary-content">
-                            <i class="material-icons mdl-list__item-avatar ">person</i>
-                            <span class="mdl-list__item-text-body">Atendente Fulano</span>
                         </span>
                     </li>
                 </div>
