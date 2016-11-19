@@ -39,11 +39,19 @@ class TicketsController extends Controller
      */
     public function store(TicketRequest $request)
     {
-        $ticket = Ticket::create($request);
+
+        //dd($request->all());
+        $ticket = Ticket::create($request->all());
         if(!$ticket->id){
             flash('Erro ao criar Ticket', 'danger');
             return Redirect::back();
         }
+
+        //$sendmail = new MailController;
+        //$sendmail_return = $sendmail->send_email_ticket($ticket);
+
+        //dd($sendmail_return);
+
 
         return redirect('tickets')->with('flash_message');
     }
@@ -80,6 +88,11 @@ class TicketsController extends Controller
     public function update( Ticket $ticket, TicketRequest $request)
     {
         $ticket->update($request->toArray());
+
+        $sendmail = new MailController;
+        $sendmail_return = $sendmail->send_email_ticket($ticket);
+
+        dd($sendmail_return);
 
         flash('Ticket atualizado com Sucesso!');
         return redirect('tickets')->with('flash_message');

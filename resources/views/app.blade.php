@@ -27,13 +27,13 @@
     <!--
     <link rel="canonical" href="http://www.example.com/">
     -->
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.cyan-light_blue.min.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
     <style>
         #view-source {
             position: fixed;
@@ -77,6 +77,7 @@
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
 
+            <a class="mdl-navigation__link" href="/tickets/create"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">event_available</i>Criar Ticket</a>
             <a class="mdl-navigation__link" href="/tickets"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">event_available</i>Tickets</a>
             <a class="mdl-navigation__link" href="/ticketstatus"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">event_available</i>Ticket Status</a>
 
@@ -85,13 +86,12 @@
         </nav>
     </div>
     <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid demo-content">
-            <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
 
-    @include('flash::message')
+        <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+        @include('flash::message')
 
-    @yield('content')
-            </div>
+        @yield('content')
+
         </div>
     </main>
 </div>

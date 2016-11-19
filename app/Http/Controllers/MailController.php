@@ -5,10 +5,40 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Mail;
-//use Mail;
 
 class MailController extends Controller
 {
+    public function send_email_ticket($client_email, $ticket){
+        if(!$client_email){
+            return response()->json([
+                'status' => 500,
+                'title' => 'Falta argumento',
+                'detail' => 'Não há email do cliente'
+            ]);
+        }
+        $data['from'] = 'dev.campanel@gmail.com';
+        $data['name_from'] = 'Dihelp';
+        $data['hello'] ='Olá';
+
+        $data['to'] = $client_email;
+        $data['name'] = $ticket->client_name;
+        $data['subject'] = '[Ticket#'.$ticket->id.'] - '.$ticket->title;
+        $data['ticket_id'] = $ticket->id;
+        $data['ticket_description'] = $ticket->description;
+
+        Mail::queue(['text'=>'emails.ticket_create'], $data, function($message) use ($data){
+            $message->to($data['to'], $data['name'])->subject($data['subject']);
+            $message->from($data['from'],$data['name_from']);
+        });
+
+        return response()->json([
+            'status' => 200,
+            'title' => 'OK',
+            'detail' => 'email enviado'
+        ]);
+
+    }
+
     // first, we create function for send Basics email
     public function basic_email(){
         $data=['name'=>'Harison matondang'];
@@ -42,6 +72,8 @@ class MailController extends Controller
         echo 'HTML Email was sent!';
 
     }
+
+
 
     //create new function to send mail with attachment Mail
     public function attachment_email(){

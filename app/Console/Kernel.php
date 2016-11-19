@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
-        //$schedule->exec('php /var/www/html/readingMailPostTicket/mail.php')->everyMinute();
+        $schedule->exec('php /var/www/html/readingMailPostTicket/mail.php')->everyMinute();
         $schedule->command('queue:work')->everyMinute();
     }
 

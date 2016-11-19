@@ -3,10 +3,6 @@
 @section('content')
 
 <div class="mdl-card__supporting-text">
-    <a href="{{ URL::route('tickets.create') }}" id="new" class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Novo Ticket</a>
-</div>
-
-<div class="mdl-card__supporting-text">
     @if ($tickets->count())
         @foreach ($tickets as $ticket)
             <div class="demo-card-square mdl-card_media mdl-shadow--2dp">

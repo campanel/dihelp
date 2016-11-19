@@ -2,31 +2,15 @@
 
 @section('content')
 
-
-    <div class="mdl-card__supporting-text">
-        {{ link_to_route('tickets.edit', 'Atualizar Ticket', array($ticket->id), array('class' => 'btn btn-warning')) }}
-    </div>
-
     <div class="demo-card-square mdl-card_media mdl-shadow--2dp">
-        <div class="mdl-card__title mdl-card--expand">
-            <table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp table table-striped">
-                <thead>
-                <tr>
-                    <th>Ticket Number</th>
-                    <th>Assunto</th>
-                    <th>Status do Ticket</th>
-                </tr>
-                </thead>
-                <tr>
-                    <td>{{ $ticket->id }}</td>
-                    <td>{{ $ticket->title }}</td>
-                    <td>Em desenvolvimento</td>
-                </tr>
-                <tr>
-                    <td colspan="3">{{ $ticket->description }}</td>
-                </tr>
-            </table>
-        </div>
+
+            {!! Form::model($ticket, ['method' => 'PATCH', 'enctype' => 'multipart/form-data',
+        'action' => ['TicketsController@update', $ticket->id]]) !!}
+
+            @include('tickets.form',['submitButtonText' => 'Atualizar Ticket', 'formTitle' => $ticket->title])
+
+            {!! Form::close() !!}
+
         @if ($comments->count())
             <div class="mdl-card__supporting-text mdl-card--border ">
                 <ul class="demo-list-three mdl-list">

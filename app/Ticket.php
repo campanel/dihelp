@@ -7,7 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
-        'title', 'description'
+        'title',
+        'description',
+        'client_id',
+        'responsible_area_id',
+        'responsible_person_id',
+        'module_id',
+        'request_id',
+        'priority_id',
+        'size_id',
     ];
 
     public function comment(){
