@@ -87,10 +87,11 @@ class TicketsController extends Controller
      */
     public function update( Ticket $ticket, TicketRequest $request)
     {
-        $ticket->update($request->toArray());
+        $parametros = $request->toArray();
+        $ticket->update($parametros);
 
         $sendmail = new MailController;
-        $sendmail_return = $sendmail->send_email_ticket($ticket);
+        $sendmail_return = $sendmail->send_email_ticket($parametros['client_email'], $ticket);
 
         dd($sendmail_return);
 
