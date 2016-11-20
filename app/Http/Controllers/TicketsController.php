@@ -47,10 +47,8 @@ class TicketsController extends Controller
             return Redirect::back();
         }
 
-        //$sendmail = new MailController;
-        //$sendmail_return = $sendmail->send_email_ticket($ticket);
-
-        //dd($sendmail_return);
+        $sendmail = new MailController;
+        $sendmail->send_email_ticket($ticket, 'create');
 
 
         return redirect('tickets')->with('flash_message');
@@ -91,9 +89,7 @@ class TicketsController extends Controller
         $ticket->update($parametros);
 
         $sendmail = new MailController;
-        $sendmail_return = $sendmail->send_email_ticket($parametros['client_email'], $ticket);
-
-        dd($sendmail_return);
+        $sendmail->send_email_ticket($ticket, 'edit');
 
         flash('Ticket atualizado com Sucesso!');
         return redirect('tickets')->with('flash_message');

@@ -7,10 +7,18 @@
             {!! Form::label('client', 'Solicitante',['class' => '']) !!}
             {!! Form::select('client_id', array('1' => 'Cliente 1', '2' => 'Cliente 2')) !!}
         </div>
-        ou
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            {!! Form::text('client_email', null, ['class' => 'mdl-textfield__input']) !!}
-            {!! Form::label('client_email', 'e-mail do solicitante',['class' => 'mdl-textfield__label']) !!}
+            {!! Form::text('contact_name', null, ['class' => 'mdl-textfield__input']) !!}
+            {!! Form::label('contact_name', 'Nome do contato principal',['class' => 'mdl-textfield__label']) !!}
+        </div>
+        <br>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            {!! Form::text('emails_to', null, ['class' => 'mdl-textfield__input']) !!}
+            {!! Form::label('emails_to', 'e-mails principais',['class' => 'mdl-textfield__label']) !!}
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            {!! Form::text('emails_to_cc', null, ['class' => 'mdl-textfield__input']) !!}
+            {!! Form::label('emails_to_cc', 'e-mails cc',['class' => 'mdl-textfield__label']) !!}
         </div>
         <br>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">

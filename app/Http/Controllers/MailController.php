@@ -8,27 +8,40 @@ use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
-    public function send_email_ticket($client_email, $ticket){
-        if(!$client_email){
+    public function send_email_ticket($ticket, $type){
+
+        if(!$ticket->emails_to){
             return response()->json([
                 'status' => 500,
-                'title' => 'Falta argumento',
+                'title' => 'Falta argumento emails_to',
                 'detail' => 'Não há email do cliente'
             ]);
         }
-        $data['from'] = 'dev.campanel@gmail.com';
-        $data['name_from'] = 'Dihelp';
-        $data['hello'] ='Olá';
+        $data['to'] = explode(';', $ticket->emails_to);
 
-        $data['to'] = $client_email;
-        $data['name'] = $ticket->client_name;
+        if(!empty($ticket->emails_to_cc)){
+            $data['to_cc'] = explode(';', $ticket->emails_to_cc);
+        }else{
+            $data['to_cc'] = null;
+        }
+
+        $data['contact_name'] = $ticket->contact_name;
         $data['subject'] = '[Ticket#'.$ticket->id.'] - '.$ticket->title;
         $data['ticket_id'] = $ticket->id;
         $data['ticket_description'] = $ticket->description;
 
-        Mail::queue(['text'=>'emails.ticket_create'], $data, function($message) use ($data){
-            $message->to($data['to'], $data['name'])->subject($data['subject']);
+        $data['from'] = 'dev.campanel@gmail.com';
+        $data['name_from'] = 'Dihelp';
+        $data['hello'] ='Olá';
+
+        Mail::queue(['text'=>'emails.ticket_'.$type], $data, function($message) use ($data){
+            $message->to($data['to'], $data['contact_name'])
+                ->subject($data['subject']);
             $message->from($data['from'],$data['name_from']);
+
+            if($data['to_cc']){
+                $message->cc($data['to_cc']);
+            }
         });
 
         return response()->json([

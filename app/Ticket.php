@@ -10,12 +10,15 @@ class Ticket extends Model
         'title',
         'description',
         'client_id',
+        'contact_name',
         'responsible_area_id',
         'responsible_person_id',
         'module_id',
         'request_id',
         'priority_id',
         'size_id',
+        'emails_to',
+        'emails_to_cc',
     ];
 
     public function comment(){
