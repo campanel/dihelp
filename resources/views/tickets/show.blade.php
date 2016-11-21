@@ -37,8 +37,5 @@
             Sem dados para exibir.
         @endif
     </div>
-
-
-
     <br>
 @stop

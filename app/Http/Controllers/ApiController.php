@@ -45,16 +45,13 @@ class ApiController extends Controller
         if($ticket_id){
             $ticket = Ticket::find($ticket_id);
             if($ticket){
-                $sendmail->send_email_ticket($ticket, 'edit');
                 return $ticket->update($ticket, $parametros);
             }
         }
 
         $newTicket = $ticket->create($parametros);
-
         $d = $sendmail->send_email_ticket($newTicket, 'create');
         dd($d);
-
         return $newTicket;
 
     }

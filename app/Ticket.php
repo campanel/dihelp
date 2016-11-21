@@ -22,13 +22,11 @@ class Ticket extends Model
     ];
 
     public function comment(){
-
         return $this->hasMany('App\TicketComments');
     }
 
     public function getCommentListAttribute()
     {
-
         return $this->comment->lists('id')->all();
     }
 }

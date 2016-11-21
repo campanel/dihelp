@@ -1,37 +1,28 @@
 @extends('app')
 
 @section('content')
-
-<div class="mdl-card__supporting-text">
-    @if ($tickets->count())
-        @foreach ($tickets as $ticket)
-            <div class="demo-card-square mdl-card_media mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand">
-                    <a href="{{ URL::route('tickets.show', array($ticket->id) )}}"
-                       class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        #{{ $ticket->id }} - {{ $ticket->title }}
-                    </a>
-
-                </div>
-                <div class="mdl-card__supporting-text">
-
-                    <li class="mdl-list__item mdl-list__item--three-line">
-                        <span class="mdl-list__item-primary-content">
-                            <span class="mdl-list__item-text-body">Atendente Fulano</span>
-
-                        </span>
-                        <span class="mdl-list__item-secondary-content">
-                            <span class="mdl-list__item-text-body">
-                              Nome do Cliente
-                            </span>
-                        </span>
-                    </li>
-                </div>
-            </div>
-            <br>
-        @endforeach
-    @else
-        Sem dados para exibir.
-    @endif
-</div>
+    <div class="mdl-card__supporting-text mdl-cell--12-col">
+        <ul class="mdl-list">
+        @if ($tickets->count())
+            @foreach ($tickets as $ticket)
+                <li class="mdl-list__item mdl-list__item--three-line border-bottom">
+                <span class="mdl-list__item-primary-content">
+                  <i class="material-icons mdl-list__item-avatar ">bug_report</i>
+                  <a href="{{ URL::route('tickets.show', array($ticket->id) )}}">
+                      <span>#{{ $ticket->id }} - {{ $ticket->title }}</span>
+                  </a>
+                  <span class="mdl-list__item-text-body">
+                    {{ substr($ticket->description, 0, 250) }}
+                  </span>
+                </span>
+                <span class="mdl-list__item-secondary-content">
+                    <i class="material-icons">speaker_notes</i>
+                </span>
+                </li>
+            @endforeach
+        @else
+            Sem dados para exibir.
+        @endif
+        </ul>
+    </div>
 @stop
