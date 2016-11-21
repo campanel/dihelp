@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TicketCommentsRequest;
 use App\TicketComments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TicketCommentsController extends Controller
 {
@@ -36,9 +37,13 @@ class TicketCommentsController extends Controller
      */
     public function store(TicketCommentsRequest $request)
     {
-        TicketComments::create($request->toArray());
-        return redirect('ticketcomments.show')->with('flash_message');
+        //dd($request);
+        $parameters = $request->toArray();
+        $parameters['user_id'] = rand(0,1);
+        TicketComments::create($parameters);
+        return Redirect::back();
     }
+
 
     /**
      * Display the specified resource.

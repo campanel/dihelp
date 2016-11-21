@@ -21,12 +21,12 @@ class Ticket extends Model
         'emails_to_cc',
     ];
 
-    public function comment(){
+    public function comments(){
         return $this->hasMany('App\TicketComments');
     }
 
     public function getCommentListAttribute()
     {
-        return $this->comment->lists('id')->all();
+        return $this->comments->lists('id')->all();
     }
 }

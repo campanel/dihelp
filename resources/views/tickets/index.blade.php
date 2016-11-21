@@ -16,7 +16,7 @@
                   </span>
                 </span>
                 <span class="mdl-list__item-secondary-content">
-                    <i class="material-icons">speaker_notes</i>
+                    <i class="material-icons mdl-color-text--grey-600">speaker_notes</i>
                 </span>
                 </li>
             @endforeach

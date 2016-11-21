@@ -6,7 +6,7 @@
     <div class="mdl-color-text--primary-contrast mdl-card__supporting-text comments">
         {!! Form::open(['url' => 'ticketcomments','enctype' => 'multipart/form-data']) !!}
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <textarea rows=1 class="mdl-textfield__input" name="comment" id="comment"></textarea>
+                <textarea rows=1 class="mdl-textfield__input" name="description" id="comment"></textarea>
                 <label for="comment" class="mdl-textfield__label">Enviar Comentário</label>
             </div>
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
