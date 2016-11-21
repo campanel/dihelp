@@ -1,6 +1,6 @@
 {{ $hello }}, {{ $contact_name }}
 
-O Ticket de número #{{ $ticket_id }} foi editado.
+As informações do Ticket de número #{{ $ticket_id }} foram alteradas.
 
-Descrição do Ticket:
+Descrição das alterações do Ticket:
 {{ $ticket_description }}

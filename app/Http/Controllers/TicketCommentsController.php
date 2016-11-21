@@ -39,8 +39,13 @@ class TicketCommentsController extends Controller
     {
         //dd($request);
         $parameters = $request->toArray();
+        //dd($parameters);
         $parameters['user_id'] = rand(0,1);
         TicketComments::create($parameters);
+
+        $sendmail = new MailController;
+        $sendmail->send_email_array($parameters,'comment');
+
         return Redirect::back();
     }
 

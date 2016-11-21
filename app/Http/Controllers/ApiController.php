@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Ticket;
+use App\TicketComments;
 use Illuminate\Http\Request;
+use PhpParser\Comment;
 
 class ApiController extends Controller
 {
@@ -14,7 +16,7 @@ class ApiController extends Controller
      */
     public function check(Request $request)
     {
-        $parametros = [
+        $parameters = [
             'title' => '',
             'description' => '',
             'client_id' => 0,
@@ -29,30 +31,32 @@ class ApiController extends Controller
             'emails_to_cc' => '',
         ];
 
-        //$parametros = $request->toArray();
-        $parametros['title'] = $request->title;
-        $parametros['contact_name'] = $request->contact_name;
-        $parametros['description'] = $request->description;
-        $parametros['emails_to'] = $request->emails_to;
-        //exit;
+        //$parameters = $request->toArray();
+        $parameters['title'] = $request->title;
+        $parameters['contact_name'] = $request->contact_name;
+        $parameters['description'] = $request->description;
+        $parameters['emails_to'] = $request->emails_to;
 
-        $ticket_id = strstr($parametros['title'], '#', true);
+        preg_match("/\[Ticket\#(?P<ticket_id>\w+)\]/i", $parameters['title'], $match);
+
 
         $ticket = new Ticket();
         $sendmail = new MailController;
-        //dd($parametros);
 
-        if($ticket_id){
-            $ticket = Ticket::find($ticket_id);
+
+        if(isset($match['ticket_id'])){
+            $parameters['ticket_id'] =
+            $ticket = Ticket::find($match['ticket_id']);
             if($ticket){
-                return $ticket->update($ticket, $parametros);
+                $parameters['ticket_id'] = $ticket->id;
+                $parameters['user_id'] = rand(0,1);
+                TicketComments::create($parameters);
             }
+        }else{
+            $newTicket = $ticket->create($parameters);
+            $d = $sendmail->send_email_ticket($newTicket, 'create');
+            dd($d);
         }
-
-        $newTicket = $ticket->create($parametros);
-        $d = $sendmail->send_email_ticket($newTicket, 'create');
-        dd($d);
-        return $newTicket;
 
     }
 }

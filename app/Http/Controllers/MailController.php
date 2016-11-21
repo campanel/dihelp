@@ -52,6 +52,50 @@ class MailController extends Controller
 
     }
 
+    public function send_email_array($arr, $type){
+
+        if(!$arr['emails_to']){
+            return response()->json([
+                'status' => 500,
+                'title' => 'Falta argumento emails_to',
+                'detail' => 'Não há email do cliente'
+            ]);
+        }
+        $data['to'] = explode(';', $arr['emails_to']);
+
+        if(!empty($arr->emails_to_cc)){
+            $data['to_cc'] = explode(';', $arr['emails_to_cc']);
+        }else{
+            $data['to_cc'] = null;
+        }
+
+        $data['contact_name'] = $arr['contact_name'];
+        $data['subject'] = '[Ticket#'.$arr['ticket_id'].'] - '.$arr['title'];
+        $data['ticket_id'] = $arr['ticket_id'];
+        $data['description'] = $arr['description'];
+
+        $data['from'] = 'dev.campanel@gmail.com';
+        $data['name_from'] = 'Dihelp';
+        $data['hello'] ='Olá';
+
+        Mail::queue(['text'=>'emails.ticket_'.$type], $data, function($message) use ($data){
+            $message->to($data['to'], $data['contact_name'])
+                ->subject($data['subject']);
+            $message->from($data['from'],$data['name_from']);
+
+            if($data['to_cc']){
+                $message->cc($data['to_cc']);
+            }
+        });
+
+        return response()->json([
+            'status' => 200,
+            'title' => 'OK',
+            'detail' => 'email enviado'
+        ]);
+
+    }
+
     // first, we create function for send Basics email
     public function basic_email(){
         $data=['name'=>'Harison matondang'];

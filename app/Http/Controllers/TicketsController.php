@@ -16,7 +16,7 @@ class TicketsController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::all()->sortByDesc("id");;
+        $tickets = Ticket::all()->sortByDesc("id");
         //dd($tickets);
         return view('tickets.index', compact('tickets'));
 
@@ -50,7 +50,6 @@ class TicketsController extends Controller
         $sendmail = new MailController;
         $sendmail->send_email_ticket($ticket, 'create');
 
-
         return redirect('tickets')->with('flash_message');
     }
 
@@ -63,7 +62,8 @@ class TicketsController extends Controller
     public function show(Ticket $ticket)
     {
         $ticketcomments = Ticket::find($ticket->id)->comments;
-        return view('tickets.show', compact('ticket','ticketcomments'));
+        $persons = array(1=>'João',2=>'Maria');
+        return view('tickets.show', compact('ticket','ticketcomments', 'persons'));
     }
 
     /**

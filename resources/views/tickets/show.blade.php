@@ -21,10 +21,10 @@
                 @foreach ($ticketcomments as $comment)
                     <div class="comment ">
                         <header class="comment__header">
-                            <img src="../images/co2.jpg" class="comment__avatar">
+                            <i class="material-icons mdl-list__item-avatar comment__avatar">person</i>
                             <div class="comment__author">
-                                <strong>James Splayd2</strong>
-                                <span>{{ $comment->create_at }}</span>
+                                <strong> {{$persons[rand(1,2)]}}</strong>
+                                <span>{{ $comment->created_at}}</span>
                             </div>
                         </header>
                         <div class="comment__text">
@@ -46,6 +46,10 @@
                     <label for="comment" class="mdl-textfield__label">Enviar Comentário</label>
                 </div>
                 <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
+                <input type="hidden" name="contact_name" value="{{$ticket->contact_name}}">
+                <input type="hidden" name="emails_to" value="{{$ticket->emails_to}}">
+                <input type="hidden" name="emails_to_cc" value="{{$ticket->emails_to_cc}}">
+                <input type="hidden" name="title" value="{{$ticket->title}}">
                 <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
                     <i class="material-icons" role="presentation">check</i><span class="visuallyhidden">add comment</span>
                 </button>
