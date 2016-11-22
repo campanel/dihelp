@@ -53,6 +53,8 @@ class ApiController extends Controller
                 TicketComments::create($parameters);
             }
         }else{
+
+            //return $parameters;
             $newTicket = $ticket->create($parameters);
             $d = $sendmail->send_email_ticket($newTicket, 'create');
             dd($d);
