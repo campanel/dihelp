@@ -34,7 +34,7 @@ class MailController extends Controller
         $data['name_from'] = 'Dihelp';
         $data['hello'] ='Olá';
 
-        Mail::queue(['text'=>'emails.ticket_'.$type], $data, function($message) use ($data){
+        Mail::send(['text'=>'emails.ticket_'.$type], $data, function($message) use ($data){
             $message->to($data['to'], $data['contact_name'])
                 ->subject($data['subject']);
             $message->from($data['from'],$data['name_from']);

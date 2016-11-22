@@ -58,7 +58,7 @@
             <span class="mdl-switch__label">Enviar email</span>
         </label>
 
-
+        <input type="hidden" name="contact_id" value="1">
     </div>
     <div class="mdl-card__actions mdl-card--border">
         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{{$submitButtonText}}</button>
